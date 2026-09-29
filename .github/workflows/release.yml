@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: '22'
+          node-version: '24'
       - name: Fetch pinned model and runtimes
         run: node scripts/fetch-assets.mjs
       - name: Test core behavior and verify assets
@@ -43,4 +43,5 @@ jobs:
           gh release create "$RELEASE_TAG" dist/edge-ai-voice-control.zip dist/store-package.zip dist/SHA256SUMS.txt \
             --target "$GITHUB_SHA" --title "清声 AI 人声控制 · 实验版 $GITHUB_RUN_NUMBER" \
             --notes-file RELEASE_NOTES.md --prerelease
+
 

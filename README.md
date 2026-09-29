@@ -12,7 +12,7 @@
 
 ## GitHub 下载
 
-请到 [Releases](https://github.com/Emb0diment/edge-ai-voice-control/releases) 下载 `edge-ai-voice-control.zip`（包含模型和运行库）。GitHub 自动生成的 Source code 包不含这些大文件，不能直接安装。首次上传后需等待 [自动构建](https://github.com/Emb0diment/edge-ai-voice-control/actions) 完成。源码构建：Node.js 22+ 运行 `node scripts/fetch-assets.mjs` 后执行测试与检查。
+请到 [Releases](https://github.com/Emb0diment/edge-ai-voice-control/releases) 下载 `edge-ai-voice-control.zip`（包含模型和运行库）。GitHub 自动生成的 Source code 包不含这些大文件，不能直接安装。首次上传后需等待 [自动构建](https://github.com/Emb0diment/edge-ai-voice-control/actions) 完成。源码构建：Node.js 24+ 运行 `node scripts/fetch-assets.mjs` 后执行测试与检查。
 
 ## 安装与使用
 
@@ -147,3 +147,4 @@ offscreen.html / audio/offscreen.js ← 持有音频流与模型线程，面板�
 - [Chrome tabCapture](https://developer.chrome.com/docs/extensions/reference/api/tabCapture) 与 [offscreen](https://developer.chrome.com/docs/extensions/reference/api/offscreen)：扩展捕获和后台音频架构。
 
 第三方许可与版本说明见 `THIRD_PARTY.md`。自有代码没有复制参考项目的整套界面或应用流程。
+
