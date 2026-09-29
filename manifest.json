@@ -1,0 +1,43 @@
+{
+  "manifest_version": 3,
+  "name": "清声 · AI 人声控制",
+  "version": "1.2.2",
+  "description": "在浏览器内使用 Demucs AI 分离标签页音频，独立调节人声与伴奏。无需本机服务。",
+  "minimum_chrome_version": "116",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "tabCapture",
+    "offscreen",
+    "scripting",
+    "declarativeNetRequestWithHostAccess"
+  ],
+  "optional_host_permissions": [
+    "https://*.bilivideo.com/*",
+    "https://*.bilivideo.cn/*",
+    "https://*.bilivideo.net/*"
+  ],
+  "background": {
+    "service_worker": "src/background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "清声 · AI 人声控制",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png",
+      "48": "icons/icon-48.png",
+      "128": "icons/icon-128.png"
+    }
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self' 'wasm-unsafe-eval'; object-src 'self'; connect-src 'self' https://*.bilivideo.com https://*.bilivideo.cn https://*.bilivideo.net; media-src 'self' blob: https://*.bilivideo.com https://*.bilivideo.cn https://*.bilivideo.net; worker-src 'self'"
+  },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  }
+}

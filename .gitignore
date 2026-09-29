@@ -1,0 +1,6 @@
+vendor/
+models/*.onnx
+dist/
+.assets-temp/
+node_modules/
+*.zip

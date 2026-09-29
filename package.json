@@ -1,0 +1,13 @@
+{
+  "name": "edge-av-enhancer",
+  "version": "1.2.2",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test --test-isolation=none tests/*.test.js",
+    "check": "node scripts/check.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

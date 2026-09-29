@@ -1,0 +1,46 @@
+name: Build test extension
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: extension-release
+  cancel-in-progress: false
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Fetch pinned model and runtimes
+        run: node scripts/fetch-assets.mjs
+      - name: Test core behavior and verify assets
+        run: |
+          node --test --test-isolation=none tests/*.test.js
+          node scripts/check.mjs
+      - name: Package unpacked Edge extension
+        run: |
+          mkdir -p dist/edge-ai-voice-control
+          cp -r manifest.json popup.html popup.css preplay.html preplay.css offscreen.html src vendor models icons PRIVACY.md README.md THIRD_PARTY.md CHANGELOG.md dist/edge-ai-voice-control/
+          cd dist
+          zip -qr edge-ai-voice-control.zip edge-ai-voice-control
+          (cd edge-ai-voice-control && zip -qr ../store-package.zip .)
+          sha256sum edge-ai-voice-control.zip store-package.zip > SHA256SUMS.txt
+      - name: Publish downloadable experimental release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: experimental-${{ github.run_number }}-${{ github.run_attempt }}
+        run: |
+          gh release create "$RELEASE_TAG" dist/edge-ai-voice-control.zip dist/store-package.zip dist/SHA256SUMS.txt \
+            --target "$GITHUB_SHA" --title "清声 AI 人声控制 · 实验版 $GITHUB_RUN_NUMBER" \
+            --notes-file RELEASE_NOTES.md --prerelease
+
